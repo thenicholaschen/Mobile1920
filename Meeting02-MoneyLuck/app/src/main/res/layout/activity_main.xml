@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How Lucky Are You?"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
+
+
+
+    <ImageView
+        android:id="@+id/moneyImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fifty"
+        android:layout_centerHorizontal="true"
+        android:foregroundGravity="center"
+        />
+
+
+    <TextView
+        android:id="@+id/footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click here to find out!"
+        android:textSize="23dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="375dp"
+        />
+
+    <Button
+        android:id="@+id/luckButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Here!"
+        android:textSize="40dp"
+        android:padding="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="420dp"
+        />
+
+
+
+
+
+
+
+
+</RelativeLayout>
