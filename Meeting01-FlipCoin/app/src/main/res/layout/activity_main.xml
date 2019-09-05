@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <ImageView
+        android:id="@+id/coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/heads"
+        android:adjustViewBounds="true"
+        android:maxWidth="591dp"
+        android:maxHeight="584dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        />
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Nicholas' Coin Flip App!"
+        android:textSize="23dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        />
+
+
+    <TextView
+        android:id="@+id/head_or_tail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=" "
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/flip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="20sp"
+        android:layout_marginTop="600dp"
+        android:text="Flip Coin"
+        android:textSize="30dp"
+        />
+
+
+
+</RelativeLayout>
