@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">The Sun Knight</string>
+
+        <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="game_title">The Sun Knight</string>
+    <string name="start_button_text">Start</string>
+    <string name="how_to_play">How to play</string>
+    <string name="how_to_play_body">
+        Hello adventurers.
+        You are Nicholas. A pretty awesome guy, dude, knight, whatever. Instructions will be shown later.
+        You just have to click "Continue" and your choices. The choices will determine your endings. Choose wisely.
+        Don\'t mess up.
+    </string>
+    <string name="action_button_text">Continue</string>
+    <string name="unlocked_endings">Unlocked Endings</string>
+    <string name="ending_one">Always Keep Your Guard On</string>
+    <string name="ending_two">Thirst Quenching Death</string>
+    <string name="normal_ending_two">You Got The Job Done, But...</string>
+    <string name="best_ending">Happily Ever After</string>
+    <string name="ending_three">Mother\'s Intuition Hit You Too Late.</string>
+    <string name="ending_four">You Messed Up, Bad. You Were So Close...</string>
+</resources>
