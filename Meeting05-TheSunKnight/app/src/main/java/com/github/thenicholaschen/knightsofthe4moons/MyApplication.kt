@@ -1,8 +1,14 @@
 package com.github.thenicholaschen.knightsofthe4moons
 
 import android.app.Application
+import timber.log.Timber
 
 class MyApplication: Application() {
+
+    override fun onCreate () {
+        super.onCreate()
+        Timber.plant(Timber.DebugTree())
+    }
 
     data class Scene(
         val title: String,
