@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/bgapps">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="SaveMoneyLah Financial Tracker"
+                android:textColor="#FFF"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Remember to always save money ya!"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Balance: "
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/top_nav_rp_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="110sp"
+                    android:text="Rp. "
+                    android:textSize="26sp"/>
+
+                <TextView
+                    android:id="@+id/text_view_balance"
+                    android:layout_toRightOf="@+id/top_nav_rp_balance"
+                    android:layout_marginLeft="43sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:textColor="#FFF"
+                    android:textSize="26sp" />
+
+                <Button
+                    android:id="@+id/reset_final_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/text_view_balance"
+                    android:layout_marginLeft="97dp"
+                    android:text="RESET FINAL BALANCE"
+                    android:textSize="10dp"/>
+
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/buttonAddBalance"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="15sp"
+                    android:background="@drawable/bgbtnnew"
+                    android:text="Add Balance"
+                    android:textColor="#149c90"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:text="Expense: "
+                        android:textColor="#FFF"
+                        android:textSize="18sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/top_nav_rp_expense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="110sp"
+                            android:text="Rp. "
+                            android:textSize="26sp"/>
+
+                        <TextView
+                            android:id="@+id/text_view_expense"
+                            android:layout_width="wrap_content"
+                            android:layout_marginLeft="43dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/top_nav_rp_expense"
+                            android:gravity="center"
+                            android:hint="0"
+                            android:textColor="#FFF"
+                            android:textSize="26sp" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonAddExpense"
+                    android:layout_toRightOf="@+id/buttonAddBalance"
+                    android:layout_marginLeft="250sp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center|bottom"
+                    android:background="@drawable/bgbtnnew"
+                    android:text="Add Expense"
+                    android:textColor="#149c90"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:gravity="center"
+                android:layout_marginTop="15sp"
+                android:text="BALANCE"
+                android:visibility="visible"
+                android:textSize="20sp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_balance"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:padding="10dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/balance_item"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:gravity="center"
+                android:text="EXPENSE"
+                android:visibility="visible"
+                android:textSize="20sp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:padding="0dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/expense_item"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title_finalAmount"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Final Balance:  Rp."
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/text_view_finalAmount"
+            android:layout_toRightOf="@+id/title_finalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="26sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

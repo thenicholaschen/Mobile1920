@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bgitemdoes">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/rp_item_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="#000C5D"
+            android:text="Rp.  "/>
+
+        <TextView
+            android:layout_toRightOf="@+id/rp_item_balance"
+            android:id="@+id/text_view_amount_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="#000C5D"
+            android:text="Title"/>
+
+        <TextView
+            android:id="@+id/text_view_description_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#525252"
+            android:layout_below="@id/text_view_amount_balance"
+            android:layout_marginTop="5dp"
+            android:text="Title Description"/>
+
+
+        <TextView
+            android:id="@+id/text_view_date_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:layout_marginTop="8dp"
+            android:gravity="right"
+            android:layout_alignParentEnd="true"
+            android:textColor="#095AAB"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BALANCE"
+            android:layout_below="@id/text_view_date_balance"
+            android:layout_marginTop="8dp"
+            android:gravity="right"
+            android:layout_alignParentEnd="true"
+            android:textColor="#07d100"
+            android:textSize="18sp"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
