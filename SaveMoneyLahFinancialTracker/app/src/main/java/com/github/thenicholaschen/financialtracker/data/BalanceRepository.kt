@@ -11,9 +11,9 @@ class BalanceRepository(application: Application) {
 
     private var allBalance: LiveData<List<Balance>>
 
-    private var sumBalance: LiveData<Int>
+    private var sumBalance: LiveData<Double>
 
-    private var finalBalance: LiveData<Int>
+    private var finalBalance: LiveData<Double>
 
 
     init {
@@ -43,11 +43,11 @@ class BalanceRepository(application: Application) {
         return allBalance
     }
 
-    fun getSumBalance(): LiveData<Int> {
+    fun getSumBalance(): LiveData<Double> {
         return sumBalance
     }
 
-    fun getFinalBalance(): LiveData<Int> {
+    fun getFinalBalance(): LiveData<Double> {
         return finalBalance
     }
 

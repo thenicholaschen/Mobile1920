@@ -24,16 +24,6 @@ import kotlin.random.Random
 class NotificationActivityPage : AppCompatActivity() {
 
 
-    private val cal = Calendar.getInstance()
-
-    companion object {
-        const val EXTRA_ID = "com.github.thenicholaschen.todolist.EXTRA_ID"
-        const val EXTRA_AMOUNT = "com.github.thenicholaschen.todolist.EXTRA_TITLE"
-        const val EXTRA_DESCRIPTION = "com.github.thenicholaschen.todolist.EXTRA_DESCRIPTION"
-        const val EXTRA_DATE = "com.github.thenicholaschen.todolist.EXTRA_DATE"
-        const val EXTRA_WEEKS = "com.github.thenicholaschen.tofolist.EXTRA_WEEKS"
-    }
-
     var answer: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +33,11 @@ class NotificationActivityPage : AppCompatActivity() {
 
         var notificationPayBtn : Button = findViewById(R.id.kill)
 
+
+
         notificationPayBtn.setOnClickListener {
-            val i = Intent(applicationContext, MainActivity::class.java)
+            v.cancel()
+            val i = Intent(applicationContext, TicTacToeActivity::class.java)
             startActivity(i)
         }
     }

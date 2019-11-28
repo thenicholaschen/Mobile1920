@@ -11,7 +11,7 @@ class ExpenseRepository(application: Application) {
 
     private var allExpense: LiveData<List<Expense>>
 
-    private var sumExpense: LiveData<Int>
+    private var sumExpense: LiveData<Double>
 
 
     init {
@@ -41,7 +41,7 @@ class ExpenseRepository(application: Application) {
         return allExpense
     }
 
-    fun getSumExpense(): LiveData<Int> {
+    fun getSumExpense(): LiveData<Double> {
         return sumExpense
     }
 

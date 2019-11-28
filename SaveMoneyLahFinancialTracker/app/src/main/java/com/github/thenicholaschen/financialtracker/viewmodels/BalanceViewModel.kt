@@ -15,12 +15,12 @@ class BalanceViewModel(application: Application) : AndroidViewModel(application)
     private var repositoryExp: ExpenseRepository =
         ExpenseRepository(application)
     private var allBalance: LiveData<List<Balance>> = repository.getAllBalance()
-    private var sumBalance: LiveData<Int> = repository.getSumBalance()
-    private var sumExpense: LiveData<Int> = repositoryExp.getSumExpense()
-    var amount = MutableLiveData<Int>()
+    private var sumBalance: LiveData<Double> = repository.getSumBalance()
+    private var sumExpense: LiveData<Double> = repositoryExp.getSumExpense()
+    var amount = MutableLiveData<Double>()
 
     init {
-        amount.value = 0
+        amount.value = 0.0
     }
 
     fun insert(balance: Balance) {
@@ -39,11 +39,11 @@ class BalanceViewModel(application: Application) : AndroidViewModel(application)
         return allBalance
     }
 
-    fun getSumBalance(): LiveData<Int> {
+    fun getSumBalance(): LiveData<Double> {
         return sumBalance
     }
 
-    fun getFinalBalance(): MutableLiveData<Int> {
+    fun getFinalBalance(): MutableLiveData<Double> {
         amount.value = (sumBalance.value)?.minus(sumExpense.value!!)
         if(amount.value == null) {
             amount.value = (amount.value)?.plus(1)

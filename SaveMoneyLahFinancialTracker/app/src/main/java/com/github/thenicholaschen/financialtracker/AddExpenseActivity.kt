@@ -11,10 +11,7 @@ import android.os.Vibrator
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.allyants.notifyme.NotifyMe
@@ -43,21 +40,16 @@ class AddExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_expense)
 
-        number_picker_weeks.minValue = 1
-        number_picker_weeks.maxValue = 27
-
         var fixedBillLayout : LinearLayout = findViewById(R.id.fixed_bill_layout)
-        var fixedBillButtonYes: RadioButton = findViewById(R.id.radio_button_fixedbillyes)
-        var fixedBillButtonNo: RadioButton = findViewById(R.id.radio_button_fixedbillno)
+        var fixedBillButtonYes: CheckBox = findViewById(R.id.checkbox_fixedbillyes)
+        var fixedBillButtonNo: CheckBox = findViewById(R.id.checkbox_fixedbillno)
+        var alarmYes = -1
 
         if (intent.hasExtra(EXTRA_ID)) {
             title = "Edit Expense"
             edit_text_expense.setText(intent.getStringExtra(EXTRA_AMOUNT))
             edit_text_description.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
             edit_text_date.text = intent.getStringExtra(EXTRA_DATE)
-            if (number_picker_weeks.value != null) {
-                number_picker_weeks.value = intent.getIntExtra(EXTRA_WEEKS, 1)
-            }
         } else {
             title = "Add Expense"
         }
@@ -79,6 +71,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 edit_text_duetime.text = SimpleDateFormat("HH:mm").format(cal.time)
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            alarmYes = 0
         }
 
         edit_text_date.setOnClickListener {
@@ -93,7 +86,7 @@ class AddExpenseActivity : AppCompatActivity() {
         }
 
         savebtn.setOnClickListener {
-            saveExpense()
+            saveExpense(alarmYes)
         }
 
         cancelbtn.setOnClickListener {
@@ -102,7 +95,7 @@ class AddExpenseActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveExpense() {
+    private fun saveExpense(alarmYes: Int) {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         if (edit_text_expense.text.toString().trim().isBlank() || edit_text_description.text.toString().trim().isBlank()) {
             Toast.makeText(this, "Fields cannot be empty!", Toast.LENGTH_SHORT).show()
@@ -110,12 +103,9 @@ class AddExpenseActivity : AppCompatActivity() {
         }
 
         val data = Intent().apply {
-            putExtra(EXTRA_AMOUNT, edit_text_expense.text.toString().toInt())
+            putExtra(EXTRA_AMOUNT, edit_text_expense.text.toString().toDouble())
             putExtra(EXTRA_DESCRIPTION, edit_text_description.text.toString())
             putExtra(EXTRA_DATE, edit_text_date.text.toString())
-            if (number_picker_weeks.value != null) {
-                number_picker_weeks.value = intent.getIntExtra(EXTRA_WEEKS, 1)
-            }
             if (intent.getIntExtra(EXTRA_ID, -1) != -1) {
                 putExtra(EXTRA_ID, intent.getIntExtra(EXTRA_ID, -1))
             }
@@ -129,7 +119,10 @@ class AddExpenseActivity : AppCompatActivity() {
             notificationIntent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, broadcast)
+
+        if (alarmYes == 0) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, broadcast)
+        }
         setResult(Activity.RESULT_OK, data)
         finish()
     }

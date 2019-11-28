@@ -10,7 +10,7 @@ class ExpenseViewModel(application: Application) : AndroidViewModel(application)
     private var repository: ExpenseRepository =
         ExpenseRepository(application)
     private var allExpense: LiveData<List<Expense>> = repository.getAllExpense()
-    private var sumExpense: LiveData<Int> = repository.getSumExpense()
+    private var sumExpense: LiveData<Double> = repository.getSumExpense()
 
 
     fun insert(expense: Expense) {
@@ -30,7 +30,7 @@ class ExpenseViewModel(application: Application) : AndroidViewModel(application)
     }
 
 
-    fun getSumExpense(): LiveData<Int> {
+    fun getSumExpense(): LiveData<Double> {
         return sumExpense
     }
 

@@ -20,8 +20,8 @@ interface BalanceDao {
     fun getAllBalance(): LiveData<List<Balance>>
 
     @Query("SELECT COALESCE(SUM(amount),0) FROM balance_table")
-    fun getSumBalance(): LiveData<Int>
+    fun getSumBalance(): LiveData<Double>
 
     @Query("SELECT SUM(balance_table.amount) - SUM(expense_table.amount) FROM balance_table JOIN expense_table")
-    fun getFinalBalance(): LiveData<Int>
+    fun getFinalBalance(): LiveData<Double>
 }

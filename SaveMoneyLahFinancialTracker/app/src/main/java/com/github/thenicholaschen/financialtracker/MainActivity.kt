@@ -22,9 +22,12 @@ import com.github.thenicholaschen.financialtracker.data.Expense
 import com.github.thenicholaschen.financialtracker.adapters.todoAdapter
 import com.github.thenicholaschen.financialtracker.adapters.todoAdapterBalance
 import com.github.thenicholaschen.financialtracker.data.Balance
+import com.github.thenicholaschen.financialtracker.notification.NotificationActivityPage
+import com.github.thenicholaschen.financialtracker.notification.TicTacToeActivity
 import com.github.thenicholaschen.financialtracker.viewmodels.BalanceViewModel
 import com.github.thenicholaschen.financialtracker.viewmodels.ExpenseViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.DecimalFormat
 import kotlin.math.absoluteValue
 
 
@@ -50,25 +53,55 @@ class MainActivity : AppCompatActivity() {
         var sumBalance: TextView = findViewById(R.id.text_view_balance)
         var sumExpense: TextView = findViewById(R.id.text_view_expense)
 
-        var _finalAmount = finalAmount.text.toString().toInt()
+        var _finalAmount = finalAmount.text.toString().toDouble()
+        var currentBalance = 0.0
+        var currentExpense = 0.0
+        val dec = DecimalFormat("#,###,###,###.##")
 
         expenseViewModel = ViewModelProviders.of(this).get(ExpenseViewModel::class.java)
         balanceViewModel = ViewModelProviders.of(this).get(BalanceViewModel::class.java)
+
+
+        fun editFinalAmountObserver() {
+            balanceViewModel.getSumBalance().observe(this, Observer<Double> { _sumBalance ->
+                sumBalance.text = _sumBalance.toString()
+                currentBalance = _sumBalance
+            })
+            expenseViewModel.getSumExpense().observe(this, Observer<Double> { _sumExpense ->
+                sumExpense.text = _sumExpense.toString()
+                currentExpense = _sumExpense
+            })
+            _finalAmount = currentBalance - currentExpense
+            var finalAmountDec = dec.format(_finalAmount)
+            finalAmount.text = finalAmountDec
+        }
+
+        balanceViewModel.getSumBalance().observe(this, Observer<Double> { _sumBalance ->
+            sumBalance.text = _sumBalance.toString()
+            currentBalance = _sumBalance
+            _finalAmount = currentBalance - currentExpense
+            var finalAmountDec = dec.format(_finalAmount)
+            finalAmount.text = finalAmountDec
+            if(_finalAmount < 0) {
+                val i = Intent(applicationContext, NotificationActivityPage::class.java)
+                startActivity(i)
+            }
+        })
+
+        expenseViewModel.getSumExpense().observe(this, Observer<Double> { _sumExpense ->
+            sumExpense.text = _sumExpense.toString()
+            currentExpense = _sumExpense
+            _finalAmount = currentBalance - currentExpense
+            var finalAmountDec = dec.format(_finalAmount)
+            finalAmount.text = finalAmountDec
+        })
 
         buttonAddExpense.setOnClickListener {
             startActivityForResult(
                 Intent(this, AddExpenseActivity::class.java),
                 ADD_EXPENSE_REQUEST
             )
-            expenseViewModel.getSumExpense().observe(this, Observer<Int> { _sumExpense ->
-                sumExpense.text = _sumExpense.toString()
-                _finalAmount-=_sumExpense.toInt()
-                finalAmount.text = _finalAmount.toString()
-            })
-        }
 
-        reset_final_balance.setOnClickListener {
-            finalAmount.text = "0"
         }
 
         buttonAddBalance.setOnClickListener {
@@ -76,11 +109,6 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, AddBalanceActivity::class.java),
                 ADD_BALANCE_REQUEST
             )
-            balanceViewModel.getSumBalance().observe(this, Observer<Int> { _sumBalance ->
-            sumBalance.text = _sumBalance.toString()
-            _finalAmount+=_sumBalance.toInt()
-            finalAmount.text = _finalAmount.toString()
-        })
         }
 
         recycler_view.layoutManager = LinearLayoutManager(this)
@@ -103,24 +131,6 @@ class MainActivity : AppCompatActivity() {
             adapterBalance.submitList(it)
         })
 
-
-
-
-
-        fun deleteExpense() {
-            expenseViewModel.getSumExpense().observe(this, Observer<Int> { _sumExpense ->
-                _finalAmount+=_sumExpense.toInt()
-                finalAmount.text = _finalAmount.toString()
-            })
-        }
-
-        fun deleteBalance() {
-            balanceViewModel.getSumBalance().observe(this, Observer<Int> { _sumExpense ->
-                _finalAmount-=_sumExpense.toInt()
-                finalAmount.text = _finalAmount.toString()
-            })
-        }
-
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -132,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 expenseViewModel.delete(adapter.getExpenseAt(viewHolder.adapterPosition))
-                deleteExpense()
+                editFinalAmountObserver()
                 Toast.makeText(baseContext, "Expense Deleted!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -149,7 +159,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 balanceViewModel.delete(adapterBalance.getBalanceAt(viewHolder.adapterPosition))
-                deleteBalance()
+                editFinalAmountObserver()
                 Toast.makeText(baseContext, "Balance Deleted!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -159,11 +169,12 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClick(expense: Expense) {
                 val intent = Intent(baseContext, AddExpenseActivity::class.java)
                 intent.putExtra(AddExpenseActivity.EXTRA_ID, expense.id)
-                intent.putExtra(AddExpenseActivity.EXTRA_AMOUNT, expense.amount.toString().toInt())
+                intent.putExtra(AddExpenseActivity.EXTRA_AMOUNT, expense.amount.toString().toDouble())
                 intent.putExtra(AddExpenseActivity.EXTRA_DESCRIPTION, expense.description)
                 intent.putExtra(AddExpenseActivity.EXTRA_DATE, expense.date)
 
                 startActivityForResult(intent, EDIT_EXPENSE_REQUEST)
+                editFinalAmountObserver()
             }
         })
 
@@ -171,11 +182,12 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClick(balance: Balance) {
                 val intent = Intent(baseContext, AddBalanceActivity::class.java)
                 intent.putExtra(AddBalanceActivity.EXTRA_ID_BALANCE, balance.id)
-                intent.putExtra(AddBalanceActivity.EXTRA_AMOUNT_BALANCE, balance.amount.toString().toInt())
+                intent.putExtra(AddBalanceActivity.EXTRA_AMOUNT_BALANCE, balance.amount.toString().toDouble())
                 intent.putExtra(AddBalanceActivity.EXTRA_DESCRIPTION_BALANCE, balance.description)
                 intent.putExtra(AddBalanceActivity.EXTRA_DATE_BALANCE, balance.date)
 
                 startActivityForResult(intent, EDIT_BALANCE_REQUEST)
+                editFinalAmountObserver()
             }
         })
 
@@ -186,7 +198,7 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == ADD_EXPENSE_REQUEST && resultCode == Activity.RESULT_OK) {
             val newExpense = Expense(
-                data!!.getIntExtra(AddExpenseActivity.EXTRA_AMOUNT, 0),
+                data!!.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0.0),
                 data.getStringExtra(AddExpenseActivity.EXTRA_DESCRIPTION),
                 data.getStringExtra(AddExpenseActivity.EXTRA_DATE)
             )
@@ -202,7 +214,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             val updateExpense = Expense(
-                data!!.getIntExtra(AddExpenseActivity.EXTRA_AMOUNT, 0),
+                data!!.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0.0),
                 data.getStringExtra(AddExpenseActivity.EXTRA_DESCRIPTION),
                 data.getStringExtra(AddExpenseActivity.EXTRA_DATE)
             )
@@ -211,7 +223,7 @@ class MainActivity : AppCompatActivity() {
 
         } else if (requestCode == ADD_BALANCE_REQUEST && resultCode == Activity.RESULT_OK) {
             val newBalance = Balance(
-                data!!.getIntExtra(AddBalanceActivity.EXTRA_AMOUNT_BALANCE, 0),
+                data!!.getDoubleExtra(AddBalanceActivity.EXTRA_AMOUNT_BALANCE, 0.0),
                 data.getStringExtra(AddBalanceActivity.EXTRA_DESCRIPTION_BALANCE),
                 data.getStringExtra(AddBalanceActivity.EXTRA_DATE_BALANCE)
             )
@@ -226,7 +238,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             val updateBalance = Balance(
-                data!!.getIntExtra(AddBalanceActivity.EXTRA_AMOUNT_BALANCE, 0),
+                data!!.getDoubleExtra(AddBalanceActivity.EXTRA_AMOUNT_BALANCE, 0.0),
                 data.getStringExtra(AddBalanceActivity.EXTRA_DESCRIPTION_BALANCE),
                 data.getStringExtra(AddBalanceActivity.EXTRA_DATE_BALANCE)
             )

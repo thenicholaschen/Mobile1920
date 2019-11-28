@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".notification.NotificationActivityPage"></activity>
+        <activity android:name=".notification.TicTacToeActivity"></activity>
         <activity
             android:name="com.github.thenicholaschen.financialtracker.Splash"
             android:theme="@style/AppTheme.SplashScreen">

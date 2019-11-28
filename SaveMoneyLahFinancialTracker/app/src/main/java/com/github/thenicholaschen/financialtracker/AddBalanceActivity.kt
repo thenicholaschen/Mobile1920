@@ -71,7 +71,7 @@ class AddBalanceActivity : AppCompatActivity() {
         }
 
         val data = Intent().apply {
-            putExtra(EXTRA_AMOUNT_BALANCE, edit_text_balance.text.toString().toInt())
+            putExtra(EXTRA_AMOUNT_BALANCE, edit_text_balance.text.toString().toDouble())
             putExtra(EXTRA_DESCRIPTION_BALANCE, edit_text_description_balance.text.toString())
             putExtra(EXTRA_DATE_BALANCE, edit_text_date_balance.text.toString())
             if (intent.getIntExtra(EXTRA_ID_BALANCE, -1) != -1) {

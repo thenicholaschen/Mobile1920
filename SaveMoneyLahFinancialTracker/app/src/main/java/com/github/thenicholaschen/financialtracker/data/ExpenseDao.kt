@@ -20,5 +20,5 @@ interface ExpenseDao {
     fun getAllExpense(): LiveData<List<Expense>>
 
     @Query("SELECT COALESCE(SUM(amount),0) from expense_table")
-    fun getSumExpense(): LiveData<Int>
+    fun getSumExpense(): LiveData<Double>
 }

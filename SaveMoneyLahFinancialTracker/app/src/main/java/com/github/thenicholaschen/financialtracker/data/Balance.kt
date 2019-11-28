@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Balance(
 
     @ColumnInfo(name = "Amount")
-    var amount: Int = 0,
+    var amount: Double = 0.0,
 
     @ColumnInfo(name = "Description")
     var description: String,

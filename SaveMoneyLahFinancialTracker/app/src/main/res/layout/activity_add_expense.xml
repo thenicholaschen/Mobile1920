@@ -84,47 +84,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Time"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <ImageView
-                    android:id="@+id/pickDatebtn"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/calendar" />
-
-                <TextView
-                    android:id="@+id/edit_text_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:hint="Date"
-                    android:textSize="25sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:layout_width="match_parent"
@@ -140,86 +101,112 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/radio_button_fixedbillyes"
+                <CheckBox
+                    android:id="@+id/checkbox_fixedbillyes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="YES"
                     android:textSize="18sp"
                     android:layout_marginLeft="16dp"/>
 
-                <RadioButton
-                    android:id="@+id/radio_button_fixedbillno"
-                    android:layout_toRightOf="@id/radio_button_fixedbillyes"
+                <CheckBox
+                    android:id="@+id/checkbox_fixedbillno"
+                    android:layout_toRightOf="@id/checkbox_fixedbillyes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NO"
                     android:textSize="18sp"
                     android:layout_marginLeft="16dp"/>
 
+
             </RelativeLayout>
 
-
-
             <LinearLayout
-                android:id="@+id/fixed_bill_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Remind Me Every:"
+                    android:layout_marginBottom="10dp"
+                    android:text="Date"
                     android:textColor="#000000"
-                    android:layout_marginTop="16sp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:textSize="18sp" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <ImageView
+                        android:id="@+id/pickDatebtn"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/calendar" />
+
+                    <TextView
+                        android:id="@+id/edit_text_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:hint="Date"
+                        android:textSize="25sp" />
+
+            </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/fixed_bill_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:text="Weeks"
+                        android:text="Remind Me Every:"
                         android:textColor="#000000"
                         android:layout_marginTop="16sp"
-                        android:layout_marginLeft="110dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginBottom="10dp"/>
 
-                    <NumberPicker
-                        android:id="@+id/number_picker_weeks"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="16dp"/>
-
-                    <ImageView
-                        android:id="@+id/pickTimebtn"
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/clock"
-                        android:layout_marginLeft="200dp"
-                        android:layout_marginTop="6dp"/>
-
-                    <TextView
-                        android:id="@+id/edit_text_duetime"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="9dp"
-                        android:layout_marginRight="18dp"
-                        android:textSize="25sp"
-                        android:gravity="right"
-                        android:hint="Time"/>
+                        android:layout_height="wrap_content">
 
-                </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/pickTimebtn"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="32sp"
+                            android:layout_marginTop="6dp"
+                            android:foregroundGravity="left"
+                            android:src="@drawable/clock" />
+
+                        <TextView
+                            android:id="@+id/edit_text_duetime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginRight="18dp"
+                            android:textSize="25sp"
+                            android:gravity="right"
+                            android:hint="Time"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
-
 
 
         </LinearLayout>
